@@ -64,6 +64,12 @@ export class WordSearch {
     buildCoord(directionArr, distance, startingPoint) {
         return [startingPoint[0] + (directionArr[0] * distance), startingPoint[1] + (directionArr[1] * distance)];
     }
+    checkAroundPoint(charToCheck, searchData, startPoint, distance, failedDirections, callback) {
+        directionalKeys.forEach((value, direction) => {
+            if (failedDirections[direction]) return false;
+            const pointToCheck = this.buildCoord(value, distance, startPoint);
+        });
+    }
 }
 
 export default new WordSearch();

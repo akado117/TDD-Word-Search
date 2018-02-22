@@ -124,4 +124,13 @@ describe('WordSearch Class', () => {
             expect(wordSearch.buildCoord([0, -1], 4, [5, 5])).toEqual([5, 1]);
         });
     });
+    describe('checkAroundPoint', () => {
+        beforeEach(() => {
+            wordSearch.buildCoord = jest.fn();
+        });
+        it('should not call buildCoord if direction has already failed', () => {
+            wordSearch.checkAroundPoint('A', {}, [0, 2], 2, { UL: true, DR: true }, () => {});
+            expect(wordSearch.buildCoord).toHaveBeenCalledTimes(6);
+        });
+    });
 });
