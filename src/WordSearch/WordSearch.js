@@ -65,7 +65,9 @@ export class WordSearch {
         return [startingPoint[0] + (directionArr[0] * distance), startingPoint[1] + (directionArr[1] * distance)];
     }
     checkIfCharMatch(coord, char, charGrid, callback, direction) {
-        if (!charGrid[coord[0]]) callback(direction);
+        const [rowPos, colPos] = coord;
+        if (!charGrid[rowPos]) return callback(direction);
+        if (!charGrid[rowPos][colPos]) return callback(direction);
     }
     checkAroundPoint(charToCheck, searchData, startPoint, distance, failedDirections, callback) {
         const { charGrid, height, width } = startPoint;

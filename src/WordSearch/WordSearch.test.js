@@ -131,6 +131,11 @@ describe('WordSearch Class', () => {
             wordSearch.checkIfCharMatch([-1, 3], 'a', charGrid, callback, 'ul');
             expect(callback).toHaveBeenCalledWith('ul');
         });
+        it('should call callback if col coord doesn\'t exist', () => {
+            const callback = jest.fn();
+            wordSearch.checkIfCharMatch([1, 3], 'a', charGrid, callback, 'ul');
+            expect(callback).toHaveBeenCalledWith('ul');
+        });
     });
     describe('checkAroundPoint', () => {
         const failedDirections = {
