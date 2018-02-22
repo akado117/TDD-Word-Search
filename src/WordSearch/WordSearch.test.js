@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { WordSearch } from './WordSearch';
 
 const CHECK = 'Check';
@@ -192,6 +193,12 @@ describe('WordSearch Class', () => {
         };
         it('should return false if no successful directions', () => {
             expect(wordSearch.returnSuccessfulDirections(failedDirectionsObj)).toBe(false);
+        });
+        it('should return false if no successful directions', () => {
+            const failedDirectionsClone = cloneDeep(failedDirectionsObj);
+            delete failedDirectionsClone.UR;
+            delete failedDirectionsClone.R;
+            expect(wordSearch.returnSuccessfulDirections(failedDirectionsClone)).toEqual(['UR', 'R']);
         });
     });
     describe('searchIfWordExistsAtPoint', () => {
