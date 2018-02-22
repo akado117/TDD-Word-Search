@@ -68,6 +68,7 @@ export class WordSearch {
         const [rowPos, colPos] = coord;
         if (!charGrid[rowPos]) return callback(direction);
         if (!charGrid[rowPos][colPos]) return callback(direction);
+        if (charGrid[rowPos][colPos] !== char) return callback(direction);
     }
     checkAroundPoint(charToCheck, searchData, startPoint, distance, failedDirections, callback) {
         const { charGrid, height, width } = startPoint;
