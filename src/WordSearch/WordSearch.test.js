@@ -106,5 +106,18 @@ describe('WordSearch Class', () => {
                 charGrid: [['array', 'of', 'arrays']],
             });
         });
+        it('should return search data object if neither verifyStringArray or splitInput return falsy values', () => {
+            wordSearch.splitInputIntoArraysByNewLineThenComma.mockReturnValue([['any'], ['array', 'of', 'arrays']]);
+            wordSearch.verifyStringArray.mockReturnValue('back to the future');
+            const searchDataObj = {
+                wordsToSearch: ['any'],
+                charGrid: [['array', 'of', 'arrays']],
+            };
+
+            expect(wordSearch.parseInputString('any value')).toEqual(searchDataObj);
+            expect(wordSearch.splitInputIntoArraysByNewLineThenComma).toHaveBeenCalledWith('any value');
+            expect(wordSearch.verifyStringArray).toHaveBeenCalledWith(searchDataObj);
+
+        });
     });
 });
