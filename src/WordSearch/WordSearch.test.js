@@ -177,5 +177,9 @@ describe('WordSearch Class', () => {
             expect(wordSearch.searchIfWordExistsAtPoint('lol', charGrid, [1,1])).toBe(false);
             expect(wordSearch.checkAroundPoint).not.toHaveBeenCalled();
         });
+        it('should call checkAroundPoint for each char in word after first', () => {
+            wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1]);
+            expect(wordSearch.checkAroundPoint).toHaveBeenCalledTimes(2);
+        });
     });
 });

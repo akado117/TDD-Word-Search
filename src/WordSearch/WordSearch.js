@@ -80,6 +80,9 @@ export class WordSearch {
     searchIfWordExistsAtPoint(word, charGrid, startingPoint) {
         const [rowPos, colPos] = startingPoint;
         if (word[0] !== charGrid[rowPos][colPos]) return false;
+        for (let i = 1; i < word.length; i++) {
+            this.checkAroundPoint(word[i], charGrid, startingPoint, i, {}, () => {})
+        }
     }
 }
 
