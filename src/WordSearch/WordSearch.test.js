@@ -168,4 +168,14 @@ describe('WordSearch Class', () => {
             expect(wordSearch.checkIfCharMatch.mock.calls[0][4]).toBe('UR');//first direction in directionalKeys Map
         });
     });
+    describe('searchIfWordExistsAtPoint', () => {
+        const charGrid = [['a', 'b'], ['c', 'd']];
+        beforeEach(() => {
+            wordSearch.checkAroundPoint = jest.fn();
+        });
+        it('should not call checkAroundPoint if first char doesn\'t match startingPoint ', () => {
+            expect(wordSearch.searchIfWordExistsAtPoint('lol', charGrid, [1,1])).toBe(false);
+            expect(wordSearch.checkAroundPoint).not.toHaveBeenCalled();
+        });
+    });
 });
