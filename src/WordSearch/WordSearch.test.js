@@ -48,5 +48,15 @@ describe('WordSearch Class', () => {
 
             setOrCheckInternalVariables(internalVariables, internalVariablesToCheck, CHECK);
         });
+        it('should set internal variables to default if not contained within searchData object fed in', () => {
+            const internalVariablesToCheck = [1337, 43, 'These are not the chars', 'you are looking for!'];
+            const searchDataObj = {};
+            internalVariablesToCheck.forEach((value, idx) => {
+                searchDataObj[internalVariables[idx]] = value;
+            });
+            wordSearch.setSearchData(searchDataObj);
+
+            setOrCheckInternalVariables(internalVariables, internalVariablesToCheck, CHECK);
+        });
     });
 });
