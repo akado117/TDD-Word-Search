@@ -178,6 +178,22 @@ describe('WordSearch Class', () => {
             expect(failedDirections.timesFailed).toBe(1);
         });
     });
+    describe('returnSuccessfulDirections', () => {
+        const failedDirectionsObj = {
+            UR: true,
+            R: true,
+            DR: true,
+            D: true,
+            DL: true,
+            L: true,
+            UL: true,
+            U: true,
+            timesFailed: 0,
+        };
+        it('should return false if no successful directions', () => {
+            expect(wordSearch.returnSuccessfulDirections(failedDirectionsObj)).toBe(false);
+        });
+    });
     describe('searchIfWordExistsAtPoint', () => {
         const charGrid = [['a', 'b'], ['c', 'd']];
         beforeEach(() => {
@@ -211,9 +227,16 @@ describe('WordSearch Class', () => {
             }
             wordSearch.checkAroundPoint = jest.fn((word, charGrid, startingPoint, i, {}, cb) => cb());
             wordSearch.onFailHelper = jest.fn(onFail);
-            wordSearch.returnSuccessfulDirections.mockReturnValue(false);
+            wordSearch.returnSuccessfulDirections.mockReturnValue('to late batman');
 
-            expect(wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1])).toEqual(false);
+            expect(wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1])).toEqual('to late batman');
+            expect(wordSearch.returnSuccessfulDirections).toHaveBeenCalledWith({
+                UR: true,
+                R: true,
+                DR: true,
+                D: true,
+                timesFailed: 0,
+            });
         });
     });
 });

@@ -80,9 +80,13 @@ export class WordSearch {
     onFailHelper(failedDirectionsObj, direction) {
         failedDirectionsObj[direction] = true;
         failedDirectionsObj.timesFailed++;
-    };
+    }
     returnSuccessfulDirections(failedDirectionsObj) {
-
+        const directionsToReturn = [];
+        directionalKeys.forEach((value, direction) => {
+            if (failedDirectionsObj[direction] !== true) directionsToReturn.push(direction);
+        });
+        return directionsToReturn.length ? directionsToReturn : false;
     }
     searchIfWordExistsAtPoint(word, charGrid, startingPoint) {
         const [rowPos, colPos] = startingPoint;
