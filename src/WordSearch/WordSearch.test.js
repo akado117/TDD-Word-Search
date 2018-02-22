@@ -168,6 +168,16 @@ describe('WordSearch Class', () => {
             expect(wordSearch.checkIfCharMatch.mock.calls[0][4]).toBe('UR');//first direction in directionalKeys Map
         });
     });
+    describe('onFailHelper', () => {
+        it('should added direction to failedDirections var and increment timesFailed by one', () => {
+            const failedDirections = {
+                timesFailed: 0,
+            };
+            wordSearch.onFailHelper(failedDirections, 'ul');
+            expect(failedDirections.ul).toBe(true);
+            expect(failedDirections.timesFailed).toBe(1);
+        });
+    });
     describe('searchIfWordExistsAtPoint', () => {
         const charGrid = [['a', 'b'], ['c', 'd']];
         beforeEach(() => {
@@ -181,5 +191,10 @@ describe('WordSearch Class', () => {
             wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1]);
             expect(wordSearch.checkAroundPoint).toHaveBeenCalledTimes(2);
         });
+        // it('should call checkAroundPoint until all directions have failed', () => {
+        //
+        //     wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1]);
+        //     expect(wordSearch.checkAroundPoint).toHaveBeenCalledTimes(1);
+        // });
     });
 });

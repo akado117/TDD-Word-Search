@@ -77,11 +77,17 @@ export class WordSearch {
             this.checkIfCharMatch(coordToCheck, charToCheck, charGrid, callback, direction);
         });
     }
+    onFailHelper(failedDirectionsObj, direction) {
+        failedDirectionsObj[direction] = true;
+        failedDirectionsObj.timesFailed++;
+    };
     searchIfWordExistsAtPoint(word, charGrid, startingPoint) {
         const [rowPos, colPos] = startingPoint;
         if (word[0] !== charGrid[rowPos][colPos]) return false;
+        const failedDirections = {};
+
         for (let i = 1; i < word.length; i++) {
-            this.checkAroundPoint(word[i], charGrid, startingPoint, i, {}, () => {})
+            this.checkAroundPoint(word[i], charGrid, startingPoint, i, {}, direction => failedDirections[direction] = true )
         }
     }
 }
