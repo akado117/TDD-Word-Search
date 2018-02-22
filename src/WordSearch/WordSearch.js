@@ -12,7 +12,15 @@ export class WordSearch {
             charGrid,
             height,
             width,
-        }
+        };
+    }
+    setSearchData(searchDataObject) {
+        const { height, width, charGrid, wordsToSearch } = (searchDataObject || {});
+
+        this.width = width || 0;
+        this.height = height || 0;
+        this.charGrid = charGrid || [];
+        this.wordsToSearch = wordsToSearch || [];
     }
 }
 
