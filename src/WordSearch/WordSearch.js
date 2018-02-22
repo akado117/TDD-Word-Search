@@ -25,6 +25,7 @@ export class WordSearch {
     splitInputIntoArraysByNewLineThenComma(inputString) {
         const splitByNewLine = inputString.split(/\r?\n/);
         if (splitByNewLine.length < 2) return false;
+        return splitByNewLine;
     }
 }
 

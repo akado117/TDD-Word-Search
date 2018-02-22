@@ -63,5 +63,8 @@ describe('WordSearch Class', () => {
         it('should pass back false if there\'s less than 2 new lines', () => {
             expect(wordSearch.splitInputIntoArraysByNewLineThenComma('some body once told me')).toBe(false);
         });
+        it('should pass back an array that is length of 1+ number of new lines', () => {
+            expect(wordSearch.splitInputIntoArraysByNewLineThenComma('some\nbody\nonce\nblank').length).toBe(4);
+        });
     });
 });
