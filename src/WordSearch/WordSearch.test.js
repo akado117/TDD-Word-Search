@@ -81,6 +81,12 @@ describe('WordSearch Class', () => {
             const input = { charGrid: [['a', 'b'],['a', 'b'], ['a', 'b']]};
             expect(wordSearch.verifyStringArray(input)).toBe(false);
         });
+        it('should add height and width to searchDataObj passed in if checks pass and return true', () => {
+            const input = { charGrid: [['a', 'b'],['a', 'b']]};
+            expect(wordSearch.verifyStringArray(input)).toBe(true);
+            expect(input.height).toBe(2);
+            expect(input.width).toBe(2);
+        });
     });
     describe('parseInputString', () => {
         beforeEach(() => {
