@@ -124,7 +124,24 @@ describe('WordSearch Class', () => {
             expect(wordSearch.buildCoord([0, -1], 4, [5, 5])).toEqual([5, 1]);
         });
     });
+    describe('checkIfCharMatch', () => {
+        const charGrid = [['a', 'b'], ['c', 'd']];
+        it('should call callback if row coord doesn\'t exist', () => {
+            const callback = jest.fn();
+            wordSearch.checkIfCharMatch([-1, 3], 'a', charGrid, callback, 'ul');
+            expect(callback).toHaveBeenCalledWith('ul');
+        });
+    });
     describe('checkAroundPoint', () => {
+        const failedDirections = {
+            UL: true,
+            U: true,
+            UR: true,
+            R: true,
+            DR: true,
+            D: true,
+            RL: true,
+        };
         beforeEach(() => {
             wordSearch.buildCoord = jest.fn();
         });
@@ -132,5 +149,11 @@ describe('WordSearch Class', () => {
             wordSearch.checkAroundPoint('A', {}, [0, 2], 2, { UL: true, DR: true }, () => {});
             expect(wordSearch.buildCoord).toHaveBeenCalledTimes(6);
         });
+        // it('should call fed in callback if row in coord less than zero', () => {
+        //     const callback = jest.fn();
+        //     wordSearch.buildCoord.mockReturnValue([-1, 3]);
+        //     wordSearch.checkAroundPoint('A', {}, [0, 2], 2, failedDirections, callback);
+        //     expect(callback).toHaveBeenCalledWith('L');
+        // });
     });
 });
