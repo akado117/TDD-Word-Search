@@ -30,11 +30,12 @@ export class WordSearch {
     verifyStringArray(searchDataObj) { //modifies input
         searchDataObj.height = searchDataObj.charGrid.length;
         searchDataObj.width = searchDataObj.charGrid[0].length;
+        if (searchDataObj.width !== searchDataObj.height) return false;
 
-        const rowsWithDifferentWidths = searchDataObj.charGrid.map((row) => {
-            if (row.length !== searchDataObj.width) return row;
-        });
+        const rowsWithDifferentWidths = searchDataObj.charGrid.filter(row => row.length !== searchDataObj.width);
         if (rowsWithDifferentWidths.length) return false;
+
+        return true;
     }
 }
 

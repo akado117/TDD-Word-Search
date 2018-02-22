@@ -77,5 +77,9 @@ describe('WordSearch Class', () => {
             const input = { charGrid: [['a', 'b'],['a', 'b'], ['a']]};
             expect(wordSearch.verifyStringArray(input)).toBe(false);
         });
+        it('should return false if height is different than width', () => {
+            const input = { charGrid: [['a', 'b'],['a', 'b'], ['a', 'b']]};
+            expect(wordSearch.verifyStringArray(input)).toBe(false);
+        });
     })
 });
