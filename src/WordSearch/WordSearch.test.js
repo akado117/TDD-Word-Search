@@ -72,4 +72,10 @@ describe('WordSearch Class', () => {
             expect(returnedArray[1].length).toBe(2);
         });
     });
+    describe('verifyStringArray', () => {
+        it('should return false if any arrays in charGrid are different lengths', () => {
+            const input = { charGrid: [['a', 'b'],['a', 'b'], ['a']]};
+            expect(wordSearch.verifyStringArray(input)).toBe(false);
+        });
+    })
 });

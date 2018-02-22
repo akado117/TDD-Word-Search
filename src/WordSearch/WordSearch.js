@@ -27,6 +27,15 @@ export class WordSearch {
         if (splitByNewLine.length < 2) return false;
         return splitByNewLine.map(row => row.split(','));
     }
+    verifyStringArray(searchDataObj) { //modifies input
+        searchDataObj.height = searchDataObj.charGrid.length;
+        searchDataObj.width = searchDataObj.charGrid[0].length;
+
+        const rowsWithDifferentWidths = searchDataObj.charGrid.map((row) => {
+            if (row.length !== searchDataObj.width) return row;
+        });
+        if (rowsWithDifferentWidths.length) return false;
+    }
 }
 
 export default new WordSearch();
