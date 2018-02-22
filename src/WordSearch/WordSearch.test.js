@@ -1,5 +1,24 @@
 import { WordSearch } from './WordSearch';
 
+const mockSplitInputIntoArraysByNewLineThenComma = jest.fn();
+const mockVerifyStringArray = jest.fn();
+const mockGetWordSearchData = jest.fn();
+const mockFindWordsInWordGrid = jest.fn();
+const mockBuildOutputCoordString = jest.fn();
+
+jest.mock('./wordSearch', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            splitInputIntoArraysByNewLineThenComma: mockSplitInputIntoArraysByNewLineThenComma,
+            verifyStringArray: mockVerifyStringArray,
+            getWordSearchData: mockGetWordSearchData,
+            findWordsInWordGrid: mockFindWordsInWordGrid,
+            buildOutputCoordString: mockBuildOutputCoordString,
+        };
+        // Now we can track calls to playSoundFile
+    });
+});
+
 const CHECK = 'Check';
 const SET = 'SET';
 
@@ -81,5 +100,12 @@ describe('WordSearch Class', () => {
             const input = { charGrid: [['a', 'b'],['a', 'b'], ['a', 'b']]};
             expect(wordSearch.verifyStringArray(input)).toBe(false);
         });
-    })
+    });
+    describe('parseInputString', () => {
+        it('should return false if splitInputIntoArraysByNewLineThenComma returns false', () => {
+            mockSplitInputIntoArraysByNewLineThenComma.mockReturnValue(false);
+            expect(wordSearch.parseInputString('any value')).toBe(false);
+            expect(mockVerifyStringArray).not.toHaveBeenCalled();
+        });
+    });
 });

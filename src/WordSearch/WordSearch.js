@@ -37,6 +37,10 @@ export class WordSearch {
 
         return true;
     }
+    parseInputString(inputString) {
+        const splitInput = this.splitInputIntoArraysByNewLineThenComma(inputString);
+        if (!splitInput) return false;
+    }
 }
 
 export default new WordSearch();
