@@ -70,11 +70,11 @@ export class WordSearch {
         if (!charGrid[rowPos][colPos]) return callback(direction);
         if (charGrid[rowPos][colPos] !== char) return callback(direction);
     }
-    checkAroundPoint(charToCheck, searchData, startPoint, distance, failedDirections, callback) {
-        const { charGrid, height, width } = startPoint;
+    checkAroundPoint(charToCheck, charGrid, startPoint, distance, failedDirections, callback) {
         directionalKeys.forEach((value, direction) => {
             if (failedDirections[direction]) return false;
-            const pointToCheck = this.buildCoord(value, distance, startPoint);
+            const coordToCheck = this.buildCoord(value, distance, startPoint);
+            this.checkIfCharMatch(coordToCheck, charToCheck, charGrid, callback, direction);
         });
     }
 }

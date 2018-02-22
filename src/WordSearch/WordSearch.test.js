@@ -148,27 +148,24 @@ describe('WordSearch Class', () => {
         });
     });
     describe('checkAroundPoint', () => {
-        const failedDirections = {
-            UL: true,
-            U: true,
-            UR: true,
-            R: true,
-            DR: true,
-            D: true,
-            RL: true,
-        };
         beforeEach(() => {
             wordSearch.buildCoord = jest.fn();
+            wordSearch.checkIfCharMatch = jest.fn();
         });
         it('should not call buildCoord if direction has already failed', () => {
-            wordSearch.checkAroundPoint('A', {}, [0, 2], 2, { UL: true, DR: true }, () => {});
+            wordSearch.checkAroundPoint('A', 'charGrid', [0, 2], 2, { UL: true, DR: true }, () => {});
             expect(wordSearch.buildCoord).toHaveBeenCalledTimes(6);
         });
-        // it('should call fed in callback if row in coord less than zero', () => {
-        //     const callback = jest.fn();
-        //     wordSearch.buildCoord.mockReturnValue([-1, 3]);
-        //     wordSearch.checkAroundPoint('A', {}, [0, 2], 2, failedDirections, callback);
-        //     expect(callback).toHaveBeenCalledWith('L');
-        // });
+        it('should call checkIfCharMatch for each direction that hasn\'t failed and be called with results from buildCoord', () => {
+            wordSearch.buildCoord.mockReturnValue([-1, 3]);
+            function cb() {};
+            wordSearch.checkAroundPoint('A', 'charGrid', [0, 2], 2, { UL: true, DR: true }, cb);
+            expect(wordSearch.checkIfCharMatch).toHaveBeenCalledTimes(6);
+            expect(wordSearch.checkIfCharMatch.mock.calls[0][0]).toEqual([-1, 3]);
+            expect(wordSearch.checkIfCharMatch.mock.calls[0][1]).toBe('A');
+            expect(wordSearch.checkIfCharMatch.mock.calls[0][2]).toBe('charGrid');
+            expect(wordSearch.checkIfCharMatch.mock.calls[0][3]).toBe(cb);
+            expect(wordSearch.checkIfCharMatch.mock.calls[0][4]).toBe('UR');//first direction in directionalKeys Map
+        });
     });
 });
