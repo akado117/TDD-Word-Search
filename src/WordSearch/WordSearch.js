@@ -81,14 +81,19 @@ export class WordSearch {
         failedDirectionsObj[direction] = true;
         failedDirectionsObj.timesFailed++;
     };
+    returnSuccessfulDirections(failedDirectionsObj) {
+
+    }
     searchIfWordExistsAtPoint(word, charGrid, startingPoint) {
         const [rowPos, colPos] = startingPoint;
         if (word[0] !== charGrid[rowPos][colPos]) return false;
-        const failedDirections = {};
-
+        const failedDirections = { timesFailed: 0 };
         for (let i = 1; i < word.length; i++) {
-            this.checkAroundPoint(word[i], charGrid, startingPoint, i, {}, direction => failedDirections[direction] = true )
+            if (failedDirections.timesFailed === numberOfDirections) return false;
+            this.checkAroundPoint(word[i], charGrid, startingPoint, i, {}, direction => this.onFailHelper(failedDirections, direction));
         }
+
+        return this.returnSuccessfulDirections(failedDirections);
     }
 }
 

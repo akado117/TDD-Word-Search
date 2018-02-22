@@ -182,6 +182,7 @@ describe('WordSearch Class', () => {
         const charGrid = [['a', 'b'], ['c', 'd']];
         beforeEach(() => {
             wordSearch.checkAroundPoint = jest.fn();
+            wordSearch.returnSuccessfulDirections = jest.fn();
         });
         it('should not call checkAroundPoint if first char doesn\'t match startingPoint ', () => {
             expect(wordSearch.searchIfWordExistsAtPoint('lol', charGrid, [1,1])).toBe(false);
@@ -191,10 +192,28 @@ describe('WordSearch Class', () => {
             wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1]);
             expect(wordSearch.checkAroundPoint).toHaveBeenCalledTimes(2);
         });
-        // it('should call checkAroundPoint until all directions have failed', () => {
-        //
-        //     wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1]);
-        //     expect(wordSearch.checkAroundPoint).toHaveBeenCalledTimes(1);
-        // });
+        it('should call checkAroundPoint until all directions have failed', () => {
+            function fakeCheck(word, charGrid, startingPoint, i, {}, cb) {//this relies on onFailHelpers implementation
+                for (let i = 0; i < 8; i++) {
+                    cb('winning');
+                }
+            }
+            wordSearch.checkAroundPoint = jest.fn(fakeCheck);
+            wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1]);
+            expect(wordSearch.checkAroundPoint).toHaveBeenCalledTimes(1);
+        });
+        it('should call returnSuccessfulDirections with failedDirectionsObj if not all directions fail', () => {
+            function onFail(failedDirectionsObj) {
+                failedDirectionsObj.UR = true;
+                failedDirectionsObj.R = true;
+                failedDirectionsObj.DR = true;
+                failedDirectionsObj.D = true;
+            }
+            wordSearch.checkAroundPoint = jest.fn((word, charGrid, startingPoint, i, {}, cb) => cb());
+            wordSearch.onFailHelper = jest.fn(onFail);
+            wordSearch.returnSuccessfulDirections.mockReturnValue(false);
+
+            expect(wordSearch.searchIfWordExistsAtPoint('bab', charGrid, [0,1])).toEqual(false);
+        });
     });
 });
