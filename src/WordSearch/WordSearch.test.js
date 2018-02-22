@@ -1,13 +1,16 @@
 import { WordSearch } from './WordSearch';
 
+const CHECK = 'Check';
+const SET = 'SET';
+
 describe('WordSearch Class', () => {
     let wordSearch;
-    const internalVariables = ['wordsToSearch', 'charGrid', 'height', 'width'];
+    const internalVariables = ['height', 'width', 'charGrid', 'wordsToSearch'];
     function setOrCheckInternalVariables(variables, valuesToSetOrCheck, isChecking, externalWordSearch) {
         variables.forEach((variable, idx) => {
-            if (isChecking) {
-                expect(externalWordSearch || wordSearch).toEqual(valuesToSetOrCheck[idx]);
-            } else {
+            if (isChecking === CHECK) {
+                expect((externalWordSearch || wordSearch)[variable]).toEqual(valuesToSetOrCheck[idx]);
+            } else if (isChecking === SET) {
                 (externalWordSearch || wordSearch)[variable] = valuesToSetOrCheck[idx];
             }
         });
@@ -17,18 +20,14 @@ describe('WordSearch Class', () => {
     });
     describe('constructor', () => {
         it('should initialize class variables to defaults', () => {
-            expect(wordSearch.wordsToSearch).toEqual([]);
-            expect(wordSearch.charGrid).toEqual([]);
-            expect(wordSearch.height).toEqual(0);
-            expect(wordSearch.width).toEqual(0);
+            const internalVariablesToCheck = [0, 0, [], []];
+            setOrCheckInternalVariables(internalVariables, internalVariablesToCheck, CHECK);
         });
     });
     describe('getSearchData', () => {
         it('should return internal variables as a searchData object', () => {
-            wordSearch.height = 1337;
-            wordSearch.width = 43;
-            wordSearch.charGrid = 'These are not the chars';
-            wordSearch.wordsToSearch = 'you are looking for!';
+            const internalVariablesToSet = [1337, 43, 'These are not the chars', 'you are looking for!'];
+            setOrCheckInternalVariables(internalVariables, internalVariablesToSet, SET);
 
             const { height, width, charGrid, wordsToSearch } = wordSearch.getSearchData();
 
@@ -41,18 +40,13 @@ describe('WordSearch Class', () => {
     });
     describe('setSearchData', () => {
         it('should set internal variables to default if not contained within searchData object fed in', () => {
-            wordSearch.height = 1337;
-            wordSearch.width = 43;
-            wordSearch.charGrid = 'These are not the chars';
-            wordSearch.wordsToSearch = 'you are looking for!';
+            const internalVariablesToSet = [1337, 43, 'These are not the chars', 'you are looking for!'];
+            const internalVariablesToCheck = [0, 0, [], []];
+            setOrCheckInternalVariables(internalVariables, internalVariablesToSet, SET);
 
             wordSearch.setSearchData();
 
-            expect(wordSearch.height).toEqual(0);
-            expect(wordSearch.width).toEqual(0);
-            expect(wordSearch.charGrid).toEqual([]);
-            expect(wordSearch.wordsToSearch).toEqual([]);
-
+            setOrCheckInternalVariables(internalVariables, internalVariablesToCheck, CHECK);
         });
     });
 });
