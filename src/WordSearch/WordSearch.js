@@ -40,6 +40,12 @@ export class WordSearch {
     parseInputString(inputString) {
         const splitInput = this.splitInputIntoArraysByNewLineThenComma(inputString);
         if (!splitInput) return false;
+        const searchDataObj = {
+            wordsToSearch: splitInput.shift(),
+            charGrid: splitInput,
+        };
+        if (!this.verifyStringArray(searchDataObj)) return false;
+        return searchDataObj;
     }
 }
 

@@ -1,24 +1,5 @@
 import { WordSearch } from './WordSearch';
 
-const mockSplitInputIntoArraysByNewLineThenComma = jest.fn();
-const mockVerifyStringArray = jest.fn();
-const mockGetWordSearchData = jest.fn();
-const mockFindWordsInWordGrid = jest.fn();
-const mockBuildOutputCoordString = jest.fn();
-
-jest.mock('./wordSearch', () => {
-    return jest.fn().mockImplementation(() => {
-        return {
-            splitInputIntoArraysByNewLineThenComma: mockSplitInputIntoArraysByNewLineThenComma,
-            verifyStringArray: mockVerifyStringArray,
-            getWordSearchData: mockGetWordSearchData,
-            findWordsInWordGrid: mockFindWordsInWordGrid,
-            buildOutputCoordString: mockBuildOutputCoordString,
-        };
-        // Now we can track calls to playSoundFile
-    });
-});
-
 const CHECK = 'Check';
 const SET = 'SET';
 
@@ -102,10 +83,22 @@ describe('WordSearch Class', () => {
         });
     });
     describe('parseInputString', () => {
+        beforeEach(() => {
+            wordSearch.splitInputIntoArraysByNewLineThenComma = jest.fn();
+            wordSearch.verifyStringArray = jest.fn();
+        });
         it('should return false if splitInputIntoArraysByNewLineThenComma returns false', () => {
-            mockSplitInputIntoArraysByNewLineThenComma.mockReturnValue(false);
+            wordSearch.splitInputIntoArraysByNewLineThenComma.mockReturnValue(false);
             expect(wordSearch.parseInputString('any value')).toBe(false);
-            expect(mockVerifyStringArray).not.toHaveBeenCalled();
+            expect(wordSearch.verifyStringArray).not.toHaveBeenCalled();
+        });
+        it('should return false if splitInputIntoArraysByNewLineThenComma returns value, but verifyStringArray returns false', () => {
+            wordSearch.splitInputIntoArraysByNewLineThenComma.mockReturnValue([['any'], ['array', 'of', 'arrays']]);
+            expect(wordSearch.parseInputString('any value')).toBe(false);
+            expect(wordSearch.verifyStringArray).toHaveBeenCalledWith({
+                wordsToSearch: ['any'],
+                charGrid: [['array', 'of', 'arrays']],
+            });
         });
     });
 });
