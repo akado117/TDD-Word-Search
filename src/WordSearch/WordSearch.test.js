@@ -117,7 +117,11 @@ describe('WordSearch Class', () => {
             expect(wordSearch.parseInputString('any value')).toEqual(searchDataObj);
             expect(wordSearch.splitInputIntoArraysByNewLineThenComma).toHaveBeenCalledWith('any value');
             expect(wordSearch.verifyStringArray).toHaveBeenCalledWith(searchDataObj);
-
+        });
+    });
+    describe('buildCoord', () => {
+        it('should return coord arr adjusted by distance and direction array', () => {
+            expect(wordSearch.buildCoord([0, -1], 4, [5, 5])).toEqual([5, 1]);
         });
     });
 });

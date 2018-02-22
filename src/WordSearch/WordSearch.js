@@ -1,3 +1,15 @@
+const directionalKeys = new Map([ // row, column - is up on row + is right on column
+    ['UR', [-1, 1]],
+    ['R', [0, 1]],
+    ['DR', [1, 1]],
+    ['D', [1, 0]],
+    ['DL', [1, -1]],
+    ['L', [0, -1]],
+    ['UL', [-1, -1]],
+    ['U', [-1, 0]],
+]);
+const numberOfDirections = directionalKeys.size;
+
 export class WordSearch {
     constructor() {
         this.wordsToSearch = [];
@@ -48,6 +60,9 @@ export class WordSearch {
         if (!this.verifyStringArray(searchDataObj)) return false;
 
         return searchDataObj;
+    }
+    buildCoord(directionArr, distance, startingPoint) {
+        return [startingPoint[0] + (directionArr[0] * distance), startingPoint[1] + (directionArr[1] * distance)];
     }
 }
 
