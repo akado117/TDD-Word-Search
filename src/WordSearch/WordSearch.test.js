@@ -141,6 +141,11 @@ describe('WordSearch Class', () => {
             wordSearch.checkIfCharMatch([1, 1], 'a', charGrid, callback, 'ul');
             expect(callback).toHaveBeenCalledWith('ul');
         });
+        it('shouldn\'t call callback if char at coord matches', () => {
+            const callback = jest.fn();
+            wordSearch.checkIfCharMatch([1, 1], 'd', charGrid, callback, 'ul');
+            expect(callback).not.toHaveBeenCalled();
+        });
     });
     describe('checkAroundPoint', () => {
         const failedDirections = {
