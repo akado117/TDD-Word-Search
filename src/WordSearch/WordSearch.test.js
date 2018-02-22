@@ -66,5 +66,10 @@ describe('WordSearch Class', () => {
         it('should pass back an array that is length of 1+ number of new lines', () => {
             expect(wordSearch.splitInputIntoArraysByNewLineThenComma('some\nbody\nonce\nblank').length).toBe(4);
         });
+        it('should pass back an array that is length of 1+ number of new lines', () => {
+            const returnedArray = wordSearch.splitInputIntoArraysByNewLineThenComma('some,body\nonce,blank\ntold,blank');
+            expect(returnedArray[0].length).toBe(2);
+            expect(returnedArray[1].length).toBe(2);
+        });
     });
 });
