@@ -59,4 +59,9 @@ describe('WordSearch Class', () => {
             setOrCheckInternalVariables(internalVariables, internalVariablesToCheck, CHECK);
         });
     });
+    describe('splitInputIntoArraysByNewLineThenComma', () => {
+        it('should pass back false if there\'s less than 2 new lines', () => {
+            expect(wordSearch.splitInputIntoArraysByNewLineThenComma('some body once told me')).toBe(false);
+        });
+    });
 });

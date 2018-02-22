@@ -22,6 +22,10 @@ export class WordSearch {
         this.charGrid = charGrid || [];
         this.wordsToSearch = wordsToSearch || [];
     }
+    splitInputIntoArraysByNewLineThenComma(inputString) {
+        const splitByNewLine = inputString.split(/\r?\n/);
+        if (splitByNewLine.length < 2) return false;
+    }
 }
 
 export default new WordSearch();
