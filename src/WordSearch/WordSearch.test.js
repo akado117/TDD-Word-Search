@@ -274,23 +274,38 @@ describe('WordSearch Class', () => {
             expect(wordSearch.getCoordsForDirection.mock.calls[1][2]).toBe(DirectionalKeys.get('DR'));
         });
     });
-    describe('findWordAtLocation', () => {
+    describe('findWordsAtLocation', () => {
         beforeEach(() => {
             wordSearch.searchIfWordExistsAtPoint = jest.fn();
             wordSearch.buildWordCoords = jest.fn();
         });
         it('should return false if no directions found and no called build word coords', () => {
             wordSearch.searchIfWordExistsAtPoint.mockReturnValue(false);
-            expect(wordSearch.findWordAtLocation('boop', 'beep', 'bop')).toBe(false);
+            expect(wordSearch.findWordsAtLocation(['boop', 'boop'], 'beep', 'bop')).toBe(false);
         });
         it('should return results from buildWordCoords and have results form searchIfWordsExistAtPoint fed in', () => {
             wordSearch.searchIfWordExistsAtPoint.mockReturnValue(['pickle', 'rick']);
             wordSearch.buildWordCoords.mockReturnValue([{}, {}]);
-            expect(wordSearch.findWordAtLocation('boop', 'beep', 'bop')).toEqual([{}, {}]);
+            expect(wordSearch.findWordsAtLocation(['boop', 'boggle'], 'beep', 'bop')).toEqual([{}, {}, {}, {}]);
             expect(wordSearch.buildWordCoords.mock.calls[0][0]).toBe('boop');
             expect(wordSearch.buildWordCoords.mock.calls[0][1]).toEqual(['pickle', 'rick']);
             expect(wordSearch.buildWordCoords.mock.calls[0][2]).toEqual('bop');
+            expect(wordSearch.buildWordCoords.mock.calls[1][0]).toBe('boggle');
+            expect(wordSearch.buildWordCoords.mock.calls[1][1]).toEqual(['pickle', 'rick']);
 
         });
+    });
+    describe('findWordsInRow', () => {
+        const searchData = {
+            charGrid: [['a', 'b', 'c'], ['d', 'e']],
+            wordsToSearch: ['manifest', 'destiny'],
+        };
+        beforeEach(() => {
+            wordSearch.findWordAtLocation = jest.fn();
+        });
+        // it('should call find word at location for each word and character in row', () => {
+        //     wordSearch.findWordsInRow(searchData, 1);
+        //     expect(wordSearch.findWordAtLocation).toHaveBeenCalledTimes(4);
+        // });
     });
 });

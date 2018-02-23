@@ -112,10 +112,22 @@ export class WordSearch {
             coords: this.getCoordsForDirection(word.length, startPoint, DirectionalKeys.get(direction)),
         }));
     }
-    findWordAtLocation(word, charGrid, startPoint) {
-        const directionArray = this.searchIfWordExistsAtPoint(word, charGrid, startPoint);
-        if (!directionArray) return false;
-        return this.buildWordCoords(word, directionArray, startPoint);
+    findWordsAtLocation(wordArr, charGrid, startPoint) {
+        let wordCoordArray = [];
+        wordArr.forEach((word) => {
+            const directionArray = this.searchIfWordExistsAtPoint(word, charGrid, startPoint);
+            if (!directionArray) return false;
+            wordCoordArray = wordCoordArray.concat(this.buildWordCoords(word, directionArray, startPoint));
+        });
+        return wordCoordArray.length ? wordCoordArray : false;
+    }
+    findWordsInRow(searchData, currentRow) {
+        const { wordsToSearch, charGrid } = searchData;
+        let wordCoordObjects = [];
+        charGrid[currentRow].forEach((charInRow) => {
+            const wordCordObjectArray = this.findWordAtLocation()
+            // wordCoordObjects = wordCoordObjects.concat
+        })
     }
 }
 
