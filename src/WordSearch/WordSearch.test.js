@@ -248,7 +248,7 @@ describe('WordSearch Class', () => {
     });
     describe('getCoordsForDirection', () => {
         it('should return array of coordinates of same length as word', () => {
-           expect(wordSearch.getCoordsForDirection(5, [0, 0], [1,1]).length).toBe(5);
+            expect(wordSearch.getCoordsForDirection(5, [0, 0], [1,1]).length).toBe(5);
         });
         it('should call buildCoord one less times than wordLength and what\'s returned added to coord array', () => {
             wordSearch.buildCoord = jest.fn().mockReturnValue([1, 1]);
@@ -258,6 +258,7 @@ describe('WordSearch Class', () => {
     });
     describe('buildWordCoords', () => {
         it('should return same number of wordCoordObjects as directions in direction array', () => {
+            wordSearch.getCoordsForDirection = jest.fn()
             expect(wordSearch.buildWordCoords('living', ['the', 'dream'], [0, 0]).length).toBe(2);
         });
         it('should call getCoordsForWords for each direction and use whats returned within wordCoordObj returned', () => {
@@ -267,10 +268,20 @@ describe('WordSearch Class', () => {
                 coords: 'IMA ARRAY OF ARRAYS',
             };
             expect(wordSearch.buildWordCoords('lep', ['UL', 'DR'], [0, 0])).toEqual([solution, solution]);
-            expect(wordSearch.getCoordsForDirection.mock.calls[0][0]).toBe('lep');
+            expect(wordSearch.getCoordsForDirection.mock.calls[0][0]).toBe(3);
             expect(wordSearch.getCoordsForDirection.mock.calls[0][1]).toEqual([0, 0]);
             expect(wordSearch.getCoordsForDirection.mock.calls[0][2]).toBe(DirectionalKeys.get('UL'));
             expect(wordSearch.getCoordsForDirection.mock.calls[1][2]).toBe(DirectionalKeys.get('DR'));
+        });
+    });
+    describe('findWordAtLocation', () => {
+        beforeEach(() => {
+            wordSearch.searchIfWordExistsAtPoint = jest.fn();
+            wordSearch.buildWordCoords = jest.fn();
+        });
+        it('should return false if no directions found and no called build word coords', () => {
+            wordSearch.searchIfWordExistsAtPoint.mockReturnValue(false);
+            expect(wordSearch.findWordAtLocation('boop', 'beep', 'bop')).toBe(false);
         });
     });
 });

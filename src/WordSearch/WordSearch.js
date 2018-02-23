@@ -105,12 +105,16 @@ export class WordSearch {
             coords.push(this.buildCoord(directionKey, i, startPoint));
         }
         return coords;
-    };
+    }
     buildWordCoords(word, directionArray, startPoint) {
         return directionArray.map(direction => ({
             word,
-            coords: this.getCoordsForDirection(word, startPoint, DirectionalKeys.get(direction)),
+            coords: this.getCoordsForDirection(word.length, startPoint, DirectionalKeys.get(direction)),
         }));
+    }
+    findWordAtLocation(word, charGrid, startPoint) {
+        const directionArray = this.searchIfWordExistsAtPoint(word, charGrid, startPoint);
+        if (!directionArray) return false;
     }
 }
 
