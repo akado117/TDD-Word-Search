@@ -129,7 +129,7 @@ export class WordSearch {
             if (!wordCordObjectArray) return;
             wordCoordObjects = wordCoordObjects.concat(wordCordObjectArray);
         });
-        return wordCoordObjects;
+        return wordCoordObjects.length ? wordCoordObjects : false;
     }
 }
 

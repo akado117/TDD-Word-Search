@@ -316,5 +316,10 @@ describe('WordSearch Class', () => {
             expect(wordSearch.findWordsAtLocation.mock.calls[1][1]).toBe(searchData.charGrid);
             expect(wordSearch.findWordsAtLocation.mock.calls[1][2]).toEqual([0, 1]);
         });
+        it('should return false if no word coord objects found', () => {
+            wordSearch.findWordsAtLocation.mockReturnValue(false);
+            expect(wordSearch.findWordsInRow(searchData, 0)).toEqual(false);
+            expect(wordSearch.findWordsAtLocation).toHaveBeenCalledTimes(3);
+        });
     });
 });
