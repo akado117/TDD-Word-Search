@@ -322,4 +322,17 @@ describe('WordSearch Class', () => {
             expect(wordSearch.findWordsAtLocation).toHaveBeenCalledTimes(3);
         });
     });
+    describe('findWordsInCharGrid', () => {
+        const searchData = {
+            charGrid: [['a', 'b', 'c'], ['d', 'e'], []],
+            wordsToSearch: ['manifest', 'destiny'],
+        };
+        beforeEach(() => {
+            wordSearch.findWordsInRow = jest.fn();
+        });
+        it('should call findWordsInRow for each row', () => {
+            wordSearch.findWordsInCharGrid(searchData);
+            expect(wordSearch.findWordsInRow).toHaveBeenCalledTimes(3);
+        });
+    });
 });

@@ -31,6 +31,7 @@ Built using node version v8.9.4 and npm version 5.6.0
 * returnSuccessfulDirections - Takes failedDirectionsObj and returns false if all directions failed or array of directions that didn't fail
 * getCoordsForDirection - Takes wordLength, startPoint, and directionKey to return an array of coord arrays the same length as the word length
 * buildWordCoords - Takes word, directionArray, and startPoint then returns wordCoordObj array for each direction
+* findWordsInCharGrid - Takes searchDataObject and returns array of wordCoordObj describing the coords of all found words
 * findWordsAtLocation - Takes charGrid, startingPoint, and words then returns array of wordCoordObj for any found words
 * findWordsInRow - Takes searchDataObject, currentRow and returns array of wordCoordObj for any words found
 * buildOutputCoordString - Takes array of wordCoordObj and returns formatted string based upon them.

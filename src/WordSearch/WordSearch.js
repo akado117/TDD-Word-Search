@@ -131,6 +131,12 @@ export class WordSearch {
         });
         return wordCoordObjects.length ? wordCoordObjects : false;
     }
+    findWordsInCharGrid(searchData) {
+        const { charGrid } = searchData;
+        charGrid.forEach((row, currentRow) => {
+            this.findWordsInRow(searchData, currentRow);
+        });
+    }
 }
 
 export default new WordSearch();
