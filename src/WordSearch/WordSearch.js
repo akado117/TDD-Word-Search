@@ -116,7 +116,7 @@ export class WordSearch {
         let wordCoordArray = [];
         wordArr.forEach((word) => {
             const directionArray = this.searchIfWordExistsAtPoint(word, charGrid, startPoint);
-            if (!directionArray) return false;
+            if (!directionArray) return;
             wordCoordArray = wordCoordArray.concat(this.buildWordCoords(word, directionArray, startPoint));
         });
         return wordCoordArray.length ? wordCoordArray : false;
@@ -124,10 +124,12 @@ export class WordSearch {
     findWordsInRow(searchData, currentRow) {
         const { wordsToSearch, charGrid } = searchData;
         let wordCoordObjects = [];
-        charGrid[currentRow].forEach((charInRow) => {
-            const wordCordObjectArray = this.findWordAtLocation()
-            // wordCoordObjects = wordCoordObjects.concat
-        })
+        charGrid[currentRow].forEach((charInRow, currentColumn) => {
+            const wordCordObjectArray = this.findWordsAtLocation(wordsToSearch, charGrid, [currentRow, currentColumn]);
+            if (!wordCordObjectArray) return;
+            wordCoordObjects = wordCoordObjects.concat(wordCordObjectArray);
+        });
+        return wordCoordObjects;
     }
 }
 

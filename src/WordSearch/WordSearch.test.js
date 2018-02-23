@@ -301,11 +301,20 @@ describe('WordSearch Class', () => {
             wordsToSearch: ['manifest', 'destiny'],
         };
         beforeEach(() => {
-            wordSearch.findWordAtLocation = jest.fn();
+            wordSearch.findWordsAtLocation = jest.fn();
         });
-        // it('should call find word at location for each word and character in row', () => {
-        //     wordSearch.findWordsInRow(searchData, 1);
-        //     expect(wordSearch.findWordAtLocation).toHaveBeenCalledTimes(4);
-        // });
+        it('should call findWordsAtLocation for each character in row', () => {
+            wordSearch.findWordsInRow(searchData, 1);
+            expect(wordSearch.findWordsAtLocation).toHaveBeenCalledTimes(2);
+        });
+        it('should combine wordCoordObjects returned into one array and return it', () => {
+            const wordCoordObj = { word: 'hunt'};
+            wordSearch.findWordsAtLocation.mockReturnValue([wordCoordObj]);
+            expect(wordSearch.findWordsInRow(searchData, 0)).toEqual([wordCoordObj, wordCoordObj, wordCoordObj]);
+            expect(wordSearch.findWordsAtLocation).toHaveBeenCalledTimes(3);
+            expect(wordSearch.findWordsAtLocation.mock.calls[1][0]).toBe(searchData.wordsToSearch);
+            expect(wordSearch.findWordsAtLocation.mock.calls[1][1]).toBe(searchData.charGrid);
+            expect(wordSearch.findWordsAtLocation.mock.calls[1][2]).toEqual([0, 1]);
+        });
     });
 });
