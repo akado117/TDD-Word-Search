@@ -358,9 +358,12 @@ describe('WordSearch Class', () => {
             word: 'lol',
             coords: [[0, 1], [1, 2], [2, 3]],
         };
-        // it('should return the word and its coordinates for each wordCoordObject', () => {
-        //     const solution = 'lol: (0,1),(1,2),(2,3)\nlol: (0,1),(1,2),(2,3)';
-        //     expect(this.buildOutputCoordString([wordCoord, wordCoord]));
-        // });
+        it('should return the word and its coordinates for each wordCoordObject', () => {
+            const solution = 'lol: sauce\nlol: sauce';
+            wordSearch.buildCoordString = jest.fn().mockReturnValue('sauce');
+            expect(wordSearch.buildOutputCoordString([wordCoord, wordCoord])).toBe(solution);
+            expect(wordSearch.buildCoordString).toHaveBeenCalledTimes(2);
+            expect(wordSearch.buildCoordString.mock.calls[0][0]).toBe(wordCoord.coords);
+        });
     });
 });
