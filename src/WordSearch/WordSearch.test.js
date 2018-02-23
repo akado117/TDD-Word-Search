@@ -250,6 +250,11 @@ describe('WordSearch Class', () => {
         it('should return array of coordinates of same length as word', () => {
            expect(wordSearch.getCoordsForDirection(5, [0, 0], [1,1]).length).toBe(5);
         });
+        it('should call buildCoord one less times than wordLength and what\'s returned added to coord array', () => {
+            wordSearch.buildCoord = jest.fn().mockReturnValue([1, 1]);
+            expect(wordSearch.getCoordsForDirection(2, [0, 0], [1,1])).toEqual([[0, 0], [1, 1]]);
+            expect(wordSearch.buildCoord).toHaveBeenCalledTimes(1);
+        });
     });
     describe('buildWordCoords', () => {
         it('should return same number of wordCoordObjects as directions in direction array', () => {
