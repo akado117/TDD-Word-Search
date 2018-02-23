@@ -115,6 +115,7 @@ export class WordSearch {
     findWordAtLocation(word, charGrid, startPoint) {
         const directionArray = this.searchIfWordExistsAtPoint(word, charGrid, startPoint);
         if (!directionArray) return false;
+        return this.buildWordCoords(word, directionArray, startPoint);
     }
 }
 

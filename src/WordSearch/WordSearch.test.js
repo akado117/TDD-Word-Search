@@ -283,5 +283,14 @@ describe('WordSearch Class', () => {
             wordSearch.searchIfWordExistsAtPoint.mockReturnValue(false);
             expect(wordSearch.findWordAtLocation('boop', 'beep', 'bop')).toBe(false);
         });
+        it('should return results from buildWordCoords and have results form searchIfWordsExistAtPoint fed in', () => {
+            wordSearch.searchIfWordExistsAtPoint.mockReturnValue(['pickle', 'rick']);
+            wordSearch.buildWordCoords.mockReturnValue([{}, {}]);
+            expect(wordSearch.findWordAtLocation('boop', 'beep', 'bop')).toEqual([{}, {}]);
+            expect(wordSearch.buildWordCoords.mock.calls[0][0]).toBe('boop');
+            expect(wordSearch.buildWordCoords.mock.calls[0][1]).toEqual(['pickle', 'rick']);
+            expect(wordSearch.buildWordCoords.mock.calls[0][2]).toEqual('bop');
+
+        });
     });
 });
