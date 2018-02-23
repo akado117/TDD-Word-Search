@@ -158,7 +158,11 @@ export class WordSearch {
         return outputString;
     }
     main(inputString) {
-
+        const searchData = this.parseInputString(inputString);
+        if (!searchData) return 'Failed to Parse Input';
+        const wordCoordArray = this.findWordsInCharGrid(searchData);
+        if (!wordCoordArray) return 'Failed to find word';
+        return this.buildOutputCoordString(wordCoordArray);
     }
 }
 

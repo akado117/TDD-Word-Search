@@ -20,20 +20,21 @@ Built using node version v8.9.4 and npm version 5.6.0
 ### WordSearch Outline
 * getSearchData - Returns internal search data as a single object.
 * setSearchData - Takes search data object, and sets internal search data.
-* parseInputString - Takes wordSearchString from file or any source and parses into searchData
-* splitInputIntoArraysByNewLineThenComma - Takes string and returns array of string arrays split by 'new line characters' then commas
-* verifyStringArray - Takes gridArray and verifies it's square
-* searchIfWordExistsAtPoint - Takes word, charGrid, and startingPoint then returns an array of any directions the word exists in, or false if not found
-* buildCoord - Takes direction map, distance, and startingPoint and returns coord obj based upon superposition of distance on starting point
-* checkIfCharMatch - Takes coord, char, charGrid, callback, direction and calls callBack with current direction on any failures
+* parseInputString - Takes wordSearchString from file or any source and parses into searchData.
+* splitInputIntoArraysByNewLineThenComma - Takes string and returns array of string arrays split by 'new line characters' then commas.
+* verifyStringArray - Takes gridArray and verifies it's square.
+* searchIfWordExistsAtPoint - Takes word, charGrid, and startingPoint then returns an array of any directions the word exists in, or false if not found.
+* buildCoord - Takes direction map, distance, and startingPoint and returns coord obj based upon superposition of distance on starting point.
+* checkIfCharMatch - Takes coord, char, charGrid, callback, direction and calls callBack with current direction on any failures.
 * checkAroundPoint - Takes charToCheck, searchData, startPoint, distance, failedDirections, and a callback then calls callBack on any direction it fails to find a character match at.
-* onFailHelper - Takes failedDirectionsObj and direction and adds direction to failedDirectionsObj as prop and sets to true, also increments timesFailed within failedDirectionsObject
-* returnSuccessfulDirections - Takes failedDirectionsObj and returns false if all directions failed or array of directions that didn't fail
-* getCoordsForDirection - Takes wordLength, startPoint, and directionKey to return an array of coord arrays the same length as the word length
-* buildWordCoords - Takes word, directionArray, and startPoint then returns wordCoordObj array for each direction
-* findWordsInCharGrid - Takes searchDataObject and returns array of wordCoordObj describing the coords of all found words
-* findWordsAtLocation - Takes charGrid, startingPoint, and words then returns array of wordCoordObj for any found words
-* findWordsInRow - Takes searchDataObject, currentRow and returns array of wordCoordObj for any words found
+* onFailHelper - Takes failedDirectionsObj and direction and adds direction to failedDirectionsObj as prop and sets to true, also increments timesFailed within failedDirectionsObject.
+* returnSuccessfulDirections - Takes failedDirectionsObj and returns false if all directions failed or array of directions that didn't fail.
+* getCoordsForDirection - Takes wordLength, startPoint, and directionKey to return an array of coord arrays the same length as the word length.
+* buildWordCoords - Takes word, directionArray, and startPoint then returns wordCoordObj array for each direction.
+* findWordsInCharGrid - Takes searchDataObject and returns array of wordCoordObj describing the coords of all found words.
+* findWordsAtLocation - Takes charGrid, startingPoint, and words then returns array of wordCoordObj for any found words.
+* findWordsInRow - Takes searchDataObject, currentRow and returns array of wordCoordObj for any words found.
+* buildCoordString - Takes array of coord arrays and returns string based upon coord data.
 * buildOutputCoordString - Takes array of wordCoordObj and returns formatted string based upon them.
 * main - Takes inputString and returns string to output.
  

@@ -370,7 +370,20 @@ describe('WordSearch Class', () => {
         });
     });
     describe('main', () => {
+        beforeEach(() => {
+            wordSearch.parseInputString = jest.fn();
+            wordSearch.findWordsInCharGrid = jest.fn();
+            wordSearch.buildOutputCoordString = jest.fn();
+        });
         it('should call internal functions and pass back a string containing words found and locations or no words were found', () => {
+            wordSearch.buildOutputCoordString.mockReturnValue('winner winner chicken dinner');
+            wordSearch.parseInputString.mockReturnValue('searchDataObject');
+            wordSearch.findWordsInCharGrid.mockReturnValue('wordCoordObjectArray');
+
+            expect(wordSearch.main('any string really')).toBe('winner winner chicken dinner');
+            expect(wordSearch.parseInputString).toHaveBeenCalledWith('any string really');
+            expect(wordSearch.findWordsInCharGrid).toHaveBeenCalledWith('searchDataObject');
+            expect(wordSearch.buildOutputCoordString).toHaveBeenCalledWith('wordCoordObjectArray');
 
         });
     });
