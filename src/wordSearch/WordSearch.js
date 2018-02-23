@@ -149,7 +149,7 @@ export class WordSearch {
         return stringToReturn;
     }
     buildOutputCoordString(wordCoordArray) {
-        if (!wordCoordArray || !wordCoordArray.length) return 'No words were found, please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d';
+        if (!wordCoordArray || !wordCoordArray.length) return 'No words were found';
         let outputString = '';
         wordCoordArray.forEach((wordCoord, idx) => {
             outputString += `${wordCoord.word}: ${this.buildCoordString(wordCoord.coords)}${idx < wordCoordArray.length - 1 ? '\n' : ''}`;
@@ -159,7 +159,7 @@ export class WordSearch {
     }
     main(inputString) {
         const searchData = this.parseInputString(inputString);
-        if (!searchData) return 'Failed to parse input';
+        if (!searchData) return 'Failed to parse input: please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d';
         const wordCoordArray = this.findWordsInCharGrid(searchData);
         if (!wordCoordArray) return 'Failed to find words';
         return this.buildOutputCoordString(wordCoordArray);

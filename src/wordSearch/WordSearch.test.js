@@ -366,7 +366,7 @@ describe('WordSearch Class', () => {
             expect(wordSearch.buildCoordString.mock.calls[0][0]).toBe(wordCoord.coords);
         });
         it('should return no words found message if empty array or no wordCoord objects passed in', () => {
-            expect(wordSearch.buildOutputCoordString([])).toBe('No words were found, please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d');
+            expect(wordSearch.buildOutputCoordString([])).toBe('No words were found');
         });
     });
     describe('main', () => {
@@ -387,7 +387,7 @@ describe('WordSearch Class', () => {
         });
         it('should return failed to parse if parseInputString returns false', () => {
             wordSearch.parseInputString.mockReturnValue(false);
-            expect(wordSearch.main('any string really')).toBe('Failed to parse input');
+            expect(wordSearch.main('any string really')).toBe('Failed to parse input: please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d');
         });
         it('should return failed to parse if parseInputString returns false', () => {
             wordSearch.parseInputString.mockReturnValue(true);

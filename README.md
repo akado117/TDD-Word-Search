@@ -4,11 +4,11 @@ Using TDD based upon Pillars approach, every class will be built step by step al
 
 ### Scripts and Running
 Built using node version v8.9.4 and npm version 5.6.0
-* `runDriverCommands` - Runs command line program. Follow onscreen prompt to enter file path and press enter. Then watch the magic!
-* `npm install` - Installs needed dependencies for commands other than `runDriverCommands` to work 
+* `searchForWords` - Runs command line program. Follow onscreen prompt to enter file path and press enter. Then watch the magic!
+* `npm install` - Installs needed dependencies for commands other than `searchForWords` to work 
 * `test` - Runs any tests within any files that have .test in their name. Will continue to watch files for updates and will rerun any tests that would be impacted by these changes.
 * `buildCMD` - Used to transpile main.js and its dependencies into a single npm package that can be consumed by a command line utility for node.
-* `buildAndRun` - Runs both `buildCMD` then `runDriverCommands` in one simple script. Used when making code changes and running a final test.
+* `buildAndRun` - Runs both `buildCMD` then `searchForWords` in one simple script. Used when making code changes and running a final test.
 
 ### General Architecture
 * NPM package with single index.js to expose to node command line

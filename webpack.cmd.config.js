@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/js/main/Main.js',
+    entry: './src/WordSearch/wordSearch.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'cmd'),
-        library: 'root-kata',
+        library: 'word-search-pillar',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
