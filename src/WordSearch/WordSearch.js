@@ -149,13 +149,16 @@ export class WordSearch {
         return stringToReturn;
     }
     buildOutputCoordString(wordCoordArray) {
-        if (!wordCoordArray.length) return 'No words were found, please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d';
+        if (!wordCoordArray || !wordCoordArray.length) return 'No words were found, please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d';
         let outputString = '';
         wordCoordArray.forEach((wordCoord, idx) => {
             outputString += `${wordCoord.word}: ${this.buildCoordString(wordCoord.coords)}${idx < wordCoordArray.length - 1 ? '\n' : ''}`;
         });
 
         return outputString;
+    }
+    main(inputString) {
+
     }
 }
 

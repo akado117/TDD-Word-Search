@@ -365,5 +365,13 @@ describe('WordSearch Class', () => {
             expect(wordSearch.buildCoordString).toHaveBeenCalledTimes(2);
             expect(wordSearch.buildCoordString.mock.calls[0][0]).toBe(wordCoord.coords);
         });
+        it('should return no words found message if empty array or no wordCoord objects passed in', () => {
+            expect(wordSearch.buildOutputCoordString([])).toBe('No words were found, please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d');
+        });
+    });
+    describe('main', () => {
+        it('should call internal functions and pass back a string containing words found and locations or no words were found', () => {
+
+        });
     });
 });
