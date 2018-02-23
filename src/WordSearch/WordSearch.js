@@ -133,9 +133,13 @@ export class WordSearch {
     }
     findWordsInCharGrid(searchData) {
         const { charGrid } = searchData;
+        let wordCoordArray = [];
         charGrid.forEach((row, currentRow) => {
-            this.findWordsInRow(searchData, currentRow);
+            const rowWordCoordArr = this.findWordsInRow(searchData, currentRow);
+            if (!rowWordCoordArr) return;
+            wordCoordArray = wordCoordArray.concat(rowWordCoordArr);
         });
+        return wordCoordArray;
     }
 }
 
