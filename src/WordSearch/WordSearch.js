@@ -99,8 +99,12 @@ export class WordSearch {
 
         return this.returnSuccessfulDirections(failedDirections);
     }
-    getCoordsForDirection() {
-
+    getCoordsForDirection(wordLength, startPoint, directionKey) {
+        const coords = [startPoint];
+        for (let i = 1; i < wordLength; i++) {
+            coords.push(this.buildCoord(directionKey, i, startPoint));
+        }
+        return coords;
     };
     buildWordCoords(word, directionArray, startPoint) {
         return directionArray.map((direction) => ({

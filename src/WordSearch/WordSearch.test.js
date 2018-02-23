@@ -246,6 +246,11 @@ describe('WordSearch Class', () => {
             });
         });
     });
+    describe('getCoordsForDirection', () => {
+        it('should return array of coordinates of same length as word', () => {
+           expect(wordSearch.getCoordsForDirection(5, [0, 0], [1,1]).length).toBe(5);
+        });
+    });
     describe('buildWordCoords', () => {
         it('should return same number of wordCoordObjects as directions in direction array', () => {
             expect(wordSearch.buildWordCoords('living', ['the', 'dream'], [0,0]).length).toBe(2);
