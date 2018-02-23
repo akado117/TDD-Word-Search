@@ -340,5 +340,11 @@ describe('WordSearch Class', () => {
             expect(wordSearch.findWordsInRow.mock.calls[1][0]).toBe(searchData);
             expect(wordSearch.findWordsInRow.mock.calls[1][1]).toBe(1);
         });
+        it('should return array of wordCoord objects should any be found, and pass correct values into findWordsInRow', () => {
+            wordSearch.findWordsInRow.mockReturnValue(false);
+            expect(wordSearch.findWordsInCharGrid(searchData)).toBe(false);
+            expect(wordSearch.findWordsInRow.mock.calls[1][0]).toBe(searchData);
+            expect(wordSearch.findWordsInRow.mock.calls[1][1]).toBe(1);
+        });
     });
 });

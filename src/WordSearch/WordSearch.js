@@ -129,7 +129,7 @@ export class WordSearch {
             if (!wordCordObjectArray) return;
             wordCoordObjects = wordCoordObjects.concat(wordCordObjectArray);
         });
-        return wordCoordObjects.length ? wordCoordObjects : false;
+        return !!wordCoordObjects.length && wordCoordObjects;
     }
     findWordsInCharGrid(searchData) {
         const { charGrid } = searchData;
@@ -139,7 +139,7 @@ export class WordSearch {
             if (!rowWordCoordArr) return;
             wordCoordArray = wordCoordArray.concat(rowWordCoordArr);
         });
-        return wordCoordArray;
+        return !!wordCoordArray.length && wordCoordArray;
     }
 }
 
