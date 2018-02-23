@@ -1,4 +1,4 @@
-const directionalKeys = new Map([ // row, column - is up on row + is right on column
+export const DirectionalKeys = new Map([ // row, column - is up on row + is right on column
     ['UR', [-1, 1]],
     ['R', [0, 1]],
     ['DR', [1, 1]],
@@ -8,7 +8,7 @@ const directionalKeys = new Map([ // row, column - is up on row + is right on co
     ['UL', [-1, -1]],
     ['U', [-1, 0]],
 ]);
-const numberOfDirections = directionalKeys.size;
+const numberOfDirections = DirectionalKeys.size;
 
 export class WordSearch {
     constructor() {
@@ -71,7 +71,7 @@ export class WordSearch {
         if (charGrid[rowPos][colPos] !== char) return callback(direction);
     }
     checkAroundPoint(charToCheck, charGrid, startPoint, distance, failedDirections, callback) {
-        directionalKeys.forEach((value, direction) => {
+        DirectionalKeys.forEach((value, direction) => {
             if (failedDirections[direction]) return false;
             const coordToCheck = this.buildCoord(value, distance, startPoint);
             this.checkIfCharMatch(coordToCheck, charToCheck, charGrid, callback, direction);
@@ -83,7 +83,7 @@ export class WordSearch {
     }
     returnSuccessfulDirections(failedDirectionsObj) {
         const directionsToReturn = [];
-        directionalKeys.forEach((value, direction) => {
+        DirectionalKeys.forEach((value, direction) => {
             if (failedDirectionsObj[direction] !== true) directionsToReturn.push(direction);
         });
         return directionsToReturn.length ? directionsToReturn : false;
@@ -107,9 +107,9 @@ export class WordSearch {
         return coords;
     };
     buildWordCoords(word, directionArray, startPoint) {
-        return directionArray.map((direction) => ({
+        return directionArray.map(direction => ({
             word,
-            coords: this.getCoordsForDirection(),
+            coords: this.getCoordsForDirection(word, startPoint, DirectionalKeys.get(direction)),
         }));
     }
 }

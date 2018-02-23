@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { WordSearch } from './WordSearch';
+import { WordSearch, DirectionalKeys } from './WordSearch';
 
 const CHECK = 'Check';
 const SET = 'SET';
@@ -166,7 +166,7 @@ describe('WordSearch Class', () => {
             expect(wordSearch.checkIfCharMatch.mock.calls[0][1]).toBe('A');
             expect(wordSearch.checkIfCharMatch.mock.calls[0][2]).toBe('charGrid');
             expect(wordSearch.checkIfCharMatch.mock.calls[0][3]).toBe(cb);
-            expect(wordSearch.checkIfCharMatch.mock.calls[0][4]).toBe('UR');//first direction in directionalKeys Map
+            expect(wordSearch.checkIfCharMatch.mock.calls[0][4]).toBe('UR');//first direction in DirectionalKeys Map
         });
     });
     describe('onFailHelper', () => {
@@ -258,7 +258,19 @@ describe('WordSearch Class', () => {
     });
     describe('buildWordCoords', () => {
         it('should return same number of wordCoordObjects as directions in direction array', () => {
-            expect(wordSearch.buildWordCoords('living', ['the', 'dream'], [0,0]).length).toBe(2);
+            expect(wordSearch.buildWordCoords('living', ['the', 'dream'], [0, 0]).length).toBe(2);
+        });
+        it('should call getCoordsForWords for each direction and use whats returned within wordCoordObj returned', () => {
+            wordSearch.getCoordsForDirection = jest.fn().mockReturnValue('IMA ARRAY OF ARRAYS');
+            const solution = {
+                word: 'lep',
+                coords: 'IMA ARRAY OF ARRAYS',
+            };
+            expect(wordSearch.buildWordCoords('lep', ['UL', 'DR'], [0, 0])).toEqual([solution, solution]);
+            expect(wordSearch.getCoordsForDirection.mock.calls[0][0]).toBe('lep');
+            expect(wordSearch.getCoordsForDirection.mock.calls[0][1]).toEqual([0, 0]);
+            expect(wordSearch.getCoordsForDirection.mock.calls[0][2]).toBe(DirectionalKeys.get('UL'));
+            expect(wordSearch.getCoordsForDirection.mock.calls[1][2]).toBe(DirectionalKeys.get('DR'));
         });
     });
 });
