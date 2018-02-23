@@ -246,4 +246,9 @@ describe('WordSearch Class', () => {
             });
         });
     });
+    describe('buildWordCoords', () => {
+        it('should return same number of wordCoordObjects as directions in direction array', () => {
+            expect(wordSearch.buildWordCoords('living', ['the', 'dream'], [0,0]).length).toBe(2);
+        });
+    });
 });

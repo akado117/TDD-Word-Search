@@ -99,6 +99,15 @@ export class WordSearch {
 
         return this.returnSuccessfulDirections(failedDirections);
     }
+    getCoordsForDirection() {
+
+    };
+    buildWordCoords(word, directionArray, startPoint) {
+        return directionArray.map((direction) => ({
+            word,
+            coords: this.getCoordsForDirection(),
+        }));
+    }
 }
 
 export default new WordSearch();

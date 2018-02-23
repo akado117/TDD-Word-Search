@@ -28,6 +28,7 @@ Built using node version v8.9.4 and npm version 5.6.0
 * checkIfCharMatch - Takes coord, char, charGrid, callback, direction and calls callBack with current direction on any failures
 * checkAroundPoint - Takes charToCheck, searchData, startPoint, distance, failedDirections, and a callback then calls callBack on any direction it fails to find a character match at.
 * onFailHelper - Takes failedDirectionsObj and direction and adds direction to failedDirectionsObj as prop and sets to true, also increments timesFailed within failedDirectionsObject
+* returnSuccessfulDirections - Takes failedDirectionsObj and returns false if all directions failed or array of directions that didn't fail
 * buildWordCoords - Takes word, directionArray, and startPoint then returns wordCoordObj array for each direction
 * findWordsInCharGrid - Takes searchDataObject and returns array of wordCoordObj describing the coords of all found words
 * findWordAtLocation - Takes charGrid, currentRow, currentCol, and word and returns array of wordCoordObj for any found words
