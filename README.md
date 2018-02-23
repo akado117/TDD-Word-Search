@@ -35,4 +35,5 @@ Built using node version v8.9.4 and npm version 5.6.0
 * findWordsAtLocation - Takes charGrid, startingPoint, and words then returns array of wordCoordObj for any found words
 * findWordsInRow - Takes searchDataObject, currentRow and returns array of wordCoordObj for any words found
 * buildOutputCoordString - Takes array of wordCoordObj and returns formatted string based upon them.
+* main - Takes inputString and returns string to output.
  

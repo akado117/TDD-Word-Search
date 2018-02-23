@@ -141,6 +141,20 @@ export class WordSearch {
         });
         return !!wordCoordArray.length && wordCoordArray;
     }
+    buildCoordString(coordArray) {
+        let stringToReturn = '';
+        coordArray.forEach((coord, idx) => {
+            stringToReturn += `(${coord[0]},${coord[1]})${idx < coordArray.length - 1 ? ',' : ''}`;
+        });
+        return stringToReturn;
+    }
+    buildOutputCoordString(wordCoordArray) {
+        if (!wordCoordArray.length) return 'No words were found, please make sure input is formatted as follows:\ncomma,separated,words\ng,r\ni,d';
+        let outputString = '';
+        wordCoordArray.forEach((wordCoord, idx) => {
+            outputString += `${wordCoord.word}:`
+        });
+    }
 }
 
 export default new WordSearch();

@@ -347,4 +347,20 @@ describe('WordSearch Class', () => {
             expect(wordSearch.findWordsInRow.mock.calls[1][1]).toBe(1);
         });
     });
+    describe('buildCoordString', () => {
+        it('should return string of coords based upon coord array fed in', () => {
+            const solution = '(0,1),(1,2),(2,3)';
+            expect(wordSearch.buildCoordString([[0, 1], [1, 2], [2, 3]])).toBe(solution);
+        });
+    });
+    describe('buildOutputCoordString', () => {
+        const wordCoord = {
+            word: 'lol',
+            coords: [[0, 1], [1, 2], [2, 3]],
+        };
+        // it('should return the word and its coordinates for each wordCoordObject', () => {
+        //     const solution = 'lol: (0,1),(1,2),(2,3)\nlol: (0,1),(1,2),(2,3)';
+        //     expect(this.buildOutputCoordString([wordCoord, wordCoord]));
+        // });
+    });
 });
