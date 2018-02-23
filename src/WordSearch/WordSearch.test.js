@@ -384,7 +384,10 @@ describe('WordSearch Class', () => {
             expect(wordSearch.parseInputString).toHaveBeenCalledWith('any string really');
             expect(wordSearch.findWordsInCharGrid).toHaveBeenCalledWith('searchDataObject');
             expect(wordSearch.buildOutputCoordString).toHaveBeenCalledWith('wordCoordObjectArray');
-
+        });
+        it('should return failed to parse if parseInputString returns false', () => {
+            wordSearch.parseInputString.mockReturnValue(false);
+            expect(wordSearch.main('any string really')).toBe('Failed to Parse Input');
         });
     });
 });
